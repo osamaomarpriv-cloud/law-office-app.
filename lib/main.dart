@@ -38,12 +38,12 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = const [
-    DashboardPage(),
-    CasesPage(),
-    ConsultationsPage(),
-    ServicesPage(),
-    MoreMenuPage(),
+  final List<Widget> _pages = [
+    const DashboardPage(),
+    const CasesPage(),
+    const ConsultationsPage(),
+    const ServicesPage(),
+    const MoreMenuPage(),
   ];
 
   @override
@@ -318,5 +318,3 @@ class ServicesPage extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: const [
-          
