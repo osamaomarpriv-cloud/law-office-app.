@@ -38,6 +38,7 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
 
+  // تمت إزالة const من هنا لحل مشكلة تهيئة الشاشات
   final List<Widget> _pages = [
     const DashboardPage(),
     const CasesPage(),
@@ -88,10 +89,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     );
   }
 }
-
-// --------------------------------------------------
-// 1. الشاشة الرئيسية (Dashboard)
-// --------------------------------------------------
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
@@ -222,10 +219,6 @@ class DashboardPage extends StatelessWidget {
     );
   }
 }
-
-// --------------------------------------------------
-// 2. شاشة القضايا (CasesPage)
-// --------------------------------------------------
 class CasesPage extends StatelessWidget {
   const CasesPage({super.key});
 
@@ -267,9 +260,6 @@ class CasesPage extends StatelessWidget {
   }
 }
 
-// --------------------------------------------------
-// 3. شاشة الاستشارات (ConsultationsPage)
-// --------------------------------------------------
 class ConsultationsPage extends StatelessWidget {
   const ConsultationsPage({super.key});
 
@@ -304,9 +294,6 @@ class ConsultationsPage extends StatelessWidget {
   }
 }
 
-// --------------------------------------------------
-// 4. شاشة الخدمات (ServicesPage)
-// --------------------------------------------------
 class ServicesPage extends StatelessWidget {
   const ServicesPage({super.key});
 
@@ -318,3 +305,145 @@ class ServicesPage extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
+        children: const [
+          ListTile(
+            leading: Icon(Icons.assignment),
+            title: Text('صياغة وتدقيق العقود والاتفاقيات'),
+            subtitle: Text('عقود البيع، الإيجار، الشراكة والشركات'),
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.verified),
+            title: Text('التوثيق والاعتماد المستندي'),
+            subtitle: Text('إنهاء إجراءات الشهر العقاري والسجل التجاري'),
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.policy),
+            title: Text('التمثيل والنيابة القانونية'),
+            subtitle: Text('الحضور والترافع أمام كافة المحاكم والجهات'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MoreMenuPage extends StatelessWidget {
+  const MoreMenuPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('إعدادات النظام والحساب'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          const UserAccountsDrawerHeader(
+            accountName: Text('المحامي / أسامة عمر'),
+            accountEmail: Text('مكتب الاستشارات القانونية - شبين الكوم'),
+            currentAccountPicture: CircleAvatar(
+              child: Icon(Icons.person, size: 40),
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+              color: Colors.indigo,
+            ),
+          ),
+          const SizedBox(height: 16),
+          ListTile(
+            leading: const Icon(Icons.lock_outline),
+            title: const Text('قفل التطبيق بالشفرة والرمز'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.sync),
+            title: const Text('المزامنة والنسخ الاحتياطي'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: const Text('عن التطبيق والإصدار'),
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class StatCard extends StatelessWidget {
+  final String title;
+  final String value;
+  final IconData icon;
+  final Color color;
+
+  const StatCard({
+    super.key,
+    required this.title,
+    required this.value,
+    required this.icon,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card.outlined(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, color: color, size: 28),
+            const SizedBox(height: 12),
+            Text(
+              value,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CategoryCard extends StatelessWidget {
+  final String title;
+  final IconData icon;
+
+  const CategoryCard({super.key, required this.title, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card.filled(
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 32, color: Theme.of(context).colorScheme.primary),
+              const SizedBox(height: 8),
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
